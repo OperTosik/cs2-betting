@@ -1,0 +1,49 @@
+services:
+  prepare_data:
+    image: cs2-betting
+    container_name: cs2-prepare-data
+    command: python src/prepareData.py
+    volumes:
+      - ./datasets:/app/datasets
+      - ./models:/app/models
+      - ./src:/app/src
+      - ./config:/app/config
+    restart: "no"
+  train_supervised:
+    image: cs2-betting
+    container_name: cs2-train-sl
+    command: python src/trainSL.py
+    volumes:
+      - ./datasets:/app/datasets
+      - ./models:/app/models
+      - ./src:/app/src
+      - ./config:/app/config
+    depends_on:
+      - prepare_data
+    restart: "no"
+
+  train_rl:
+    image: cs2-betting
+    container_name: cs2-train-rl
+    command: python src/trainRL.py
+    volumes:
+      - ./datasets:/app/datasets
+      - ./models:/app/models
+      - ./src:/app/src
+      - ./config:/app/config
+    depends_on:
+      - train_supervised
+    restart: "no"
+
+  predict:
+    image: cs2-betting
+    container_name: cs2-predict
+    command: python src/predict.py
+    volumes:
+      - ./datasets:/app/datasets
+      - ./models:/app/models
+      - ./src:/app/src
+      - ./config:/app/config
+    depends_on:
+      - train_rl
+    restart: "no"
