@@ -49,7 +49,7 @@ git clone https://github.com/OperTosik/cs2-betting.git
 ```
 ### Data
 
-I have attached the files as an example of dataset. [Dataset description]()
+I have attached the files as an example of dataset. [Dataset description](https://github.com/OperTosik/cs2-betting/blob/main/datasets/README.md)
 
 In `datasets/predictData.csv` you shoud to enter the details of the upcoming matches. I also recommend entering mirrored string for each match like this:
 ```
