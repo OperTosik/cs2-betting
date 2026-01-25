@@ -27,7 +27,7 @@ class CS2BettingEnv(gym.Env):
         self.observation_space = spaces.Box(
             low=-np.inf,
             high=np.inf,
-            shape=(8,),
+            shape=(9,),         # size of obs
             dtype=np.float32
         )
 
@@ -40,7 +40,7 @@ class CS2BettingEnv(gym.Env):
         obs = self._get_obs()
         info = {"bankroll": self.bankroll}
 
-        return obs, info                  # ← теперь возвращаем tuple (observation, info)
+        return obs, info
 
     def _get_obs(self):
         row = self.df.iloc[self.idx]

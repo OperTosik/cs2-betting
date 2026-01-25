@@ -26,6 +26,6 @@ model.fit(
     use_best_model=True
 )
 
-model.save_model("models/catboost_model.cbm")
+model.save_model(os.path.join(config.models_path, config.catboost_model_name))
 
 print("✅ CatBoost model trained")

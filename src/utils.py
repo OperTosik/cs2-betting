@@ -29,12 +29,13 @@ def build_observation(row, p_hat=None, bankroll=None, only_features=False):     
         return features
 
     edge = p_hat - (1.0 / row["odds_A"])
-
-    obs = np.array([
+    
+    obs = np.array([        # If you change features, you have to change 30 line in env.py
         p_hat,
         row["odds_A"],
         edge,
         bankroll / 1000.0,
+        config.MAPS[row["map"]],
         row["lan"],
         row["bo_type"],
         row["ln_games_A"],

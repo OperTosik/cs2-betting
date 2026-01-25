@@ -7,8 +7,8 @@ from config import config
 
 df = pd.read_csv(os.path.join(config.data_path, config.predict_path))
 
-sl_agent = SupervisedAgent(os.path.join(config.models_path, "catboost_model.cbm"))
-rl_agent = BettingAgent(os.path.join(config.models_path, "pro_model"))
+sl_agent = SupervisedAgent(os.path.join(config.models_path, config.catboost_model_name))
+rl_agent = BettingAgent(os.path.join(config.models_path, config.pro_model_name))
 
 bankroll = 1000.0
 
@@ -20,4 +20,9 @@ for i, row in df.iterrows():
     obs = build_observation(row, p_hat, bankroll)
     action = rl_agent.act(obs)
 
-    print(f"Match {i}: P={p_hat:.3f}, Action={action}")
+    if action > 0:
+        map_match = row["map"]
+        win_match = row["team_A"]
+        print(f"Match {i}: P={p_hat:.3f}, Action={action}, Map={map_match}, Winner={win_match}")
+    else:
+        print(f"Match {i}: P={p_hat:.3f}, Action={action}")
