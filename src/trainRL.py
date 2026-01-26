@@ -5,7 +5,8 @@ from config import config
 
 env = CS2BettingEnv(
     data_path=os.path.join(config.data_path, "commonData.csv"),
-    model_path=os.path.join(config.models_path, config.catboost_model_name),
+    sl_model_path=os.path.join(config.models_path, config.catboost_model_name),
+    slc_model_path=os.path.join(config.models_path, "calibrated_" + config.catboost_model_name)
 )
 
 model = PPO(

@@ -22,16 +22,34 @@ def prepare_supervised_data(df):    # For SL agent
 def save_data(df, filename):
     df.to_csv(os.path.join(config.data_path, filename), index=False)
 
-def build_observation(row, p_hat=None, bankroll=None, only_features=False):     # For RL agent
-    features = np.array([row[f] for f in config.FEATURES], dtype=np.float32)
+def build_observation(     # For RL agent
+    row, 
+    p_hat=None, 
+    p_hat_cal=None, 
+    uncertainty=None,
+    bankroll=None, 
+    only_features=False, 
+):
+    features = np.array(
+        [row[f] for f in config.FEATURES],
+        dtype=np.float32
+    )
 
     if only_features:
         return features
-
-    edge = p_hat - (1.0 / row["odds_A"])
     
-    obs = np.array([        # If you change features, you have to change 30 line in env.py
+    # Safety checks
+    assert p_hat is not None
+    assert bankroll is not None
+    assert p_hat_cal is not None
+    assert uncertainty is not None
+
+    edge = p_hat_cal - (1.0 / row["odds_A"])
+    
+    obs = np.array([        # If you change features, you have to change 32 line in env.py
         p_hat,
+        p_hat_cal,
+        uncertainty,
         row["odds_A"],
         edge,
         bankroll / 1000.0,
@@ -43,3 +61,4 @@ def build_observation(row, p_hat=None, bankroll=None, only_features=False):     
     ], dtype=np.float32)
 
     return obs
+

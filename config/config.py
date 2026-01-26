@@ -2,8 +2,8 @@ data_path = "datasets"
 predict_path = "predictData.csv"
 models_path = "models"
 
-catboost_model_name = "catboost_model_v1_0.cbm"
-pro_model_name = "pro_model_v1_0"
+catboost_model_name = "catboost_model_v2_0.cbm"
+pro_model_name = "pro_model_v2_0"
 
 DATA = [
     "BlastBounty2026Season1Reflected.csv",

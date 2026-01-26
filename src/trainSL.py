@@ -23,7 +23,7 @@ model.fit(
     X,
     y,
     # eval_set=(X_val, y_val),
-    use_best_model=True
+    # use_best_model=True
 )
 
 model.save_model(os.path.join(config.models_path, config.catboost_model_name))

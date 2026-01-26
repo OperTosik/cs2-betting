@@ -9,7 +9,8 @@ services:
       - ./src:/app/src
       - ./config:/app/config
     restart: "no"
-  train_supervised:
+
+  train_sl:
     image: cs2-betting
     container_name: cs2-train-sl
     command: python src/trainSL.py
@@ -22,6 +23,19 @@ services:
       - prepare_data
     restart: "no"
 
+  train_sl_cal:
+    image: cs2-betting
+    container_name: cs2-train-sl-cal
+    command: python src/agentSLCalibrated.py
+    volumes:
+      - ./datasets:/app/datasets
+      - ./models:/app/models
+      - ./src:/app/src
+      - ./config:/app/config
+    depends_on:
+      - train_sl
+    restart: "no"
+
   train_rl:
     image: cs2-betting
     container_name: cs2-train-rl
@@ -32,7 +46,8 @@ services:
       - ./src:/app/src
       - ./config:/app/config
     depends_on:
-      - train_supervised
+      - train_sl
+      - train_sl_cal
     restart: "no"
 
   predict:
