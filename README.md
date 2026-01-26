@@ -4,7 +4,7 @@
 
 ### Agents
 
-Agent 1: CatBoost classifier is used for predict probably of win team_A.
+Agent 1: CatBoost classifier is used for predict probably of win team_A. The probability calibration prevents the agent 2 from overbetting.
 
 Agent 2: Proximal Policy Optimization algorithm return actions:
 
@@ -24,6 +24,7 @@ cs2_betting/
 ├─ src/
 │  ├─ prepareData.py
 │  ├─ agentSL.py     # CatBoost model
+│  ├─ agentSLCalibrated.py
 │  ├─ agentRL.py     # PPO agent
 │  ├─ env.py         # Gym env
 │  ├─ trainSL.py
@@ -81,6 +82,12 @@ Train CatBoost model:
 
 ```
 docker-compose run train_supervised
+```
+
+Calibration model:
+
+```
+docker-compose run train_sl_cal
 ```
 
 Train PRO:
