@@ -58,6 +58,19 @@ In `datasets/predictData.csv` you shoud to enter the details of the upcoming mat
 2026-01-28,GamerLegion,Aurora,Mirage,3,1,2.8,1.38,-100,-143,0.579,0.533,2.833213344056216,2.772588722239781,0.5,0.5,-0.5714285714285714,-0.0019999999999997797,-0.27049999999999974,0.71,0.54,0.521,1,1,
 ```
 
+List of tournaments included in the dataset:
+* Blast Bounty 2026 Season 1
+* IEM Krakow 2026
+* PGL Cluj-Napoca 2026
+* ESL Pro League Season 23
+* Blast Open Rotterdam 2026
+* PGL Bucharest 2026
+* IEM Rio 2026
+* PGL Astana 2026
+* IEM Atlanta 2026
+* CS Asia Championships 2026
+
+
 ### Configuration
 
 The parameters used are listed in `config/config.py`. List `DATA` is contaned name of dataframe files. You can change features of dataframe in `FEATURES`.
