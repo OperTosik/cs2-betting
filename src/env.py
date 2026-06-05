@@ -88,6 +88,9 @@ class CS2BettingEnv(gym.Env):
         # reward shaping
         reward = np.log((self.bankroll + profit) / self.bankroll) if stake > 0 else 0.0
 
+        # risk penalty
+        reward -= 0.1 * stake_frac
+
         self.bankroll += profit
         self.idx += 1
 

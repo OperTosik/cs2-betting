@@ -15,6 +15,8 @@ slc_agent = SupervisedAgentCalibrated(os.path.join(config.models_path, "calibrat
 
 bankroll = 1000.0
 
+result = open(os.path.join(config.data_path, config.result_path), 'a')
+
 for i, row in df.iterrows():
     p_hat = sl_agent.predict_single(
         build_observation(row, only_features=True)
@@ -32,5 +34,13 @@ for i, row in df.iterrows():
         map_match = row["map"]
         win_match = row["team_A"]
         print(f"Match {i}: P={p_hat:.3f}, Action={action}, Map={map_match}, Winner={win_match}")
+        result.write(f"Match {i}: P={p_hat:.3f}, Action={action}, Map={map_match}, Winner={win_match}\n")
     else:
         print(f"Match {i}: P={p_hat:.3f}, Action={action}")
+        result.write(f"Match {i}: P={p_hat:.3f}, Action={action}\n")
+    
+    # if (action > 0) and (p_hat > 0.7):
+    #     map_match = row["map"]
+    #     win_match = row["team_A"]
+    #     print(f"Match {i}: P={p_hat:.3f}, Action={action}, Map={map_match}, Winner={win_match}")
+    #     result.write(f"Match {i}: P={p_hat:.3f}, Action={action}, Map={map_match}, Winner={win_match}\n")
